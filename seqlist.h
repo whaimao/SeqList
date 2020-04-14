@@ -6,7 +6,7 @@ typedef void SeqListNode;
 // 创建一个链表 顺序存储
 SeqList *SeqList_Create(int capacity);
 
-void SeqList_Destory(SeqList * list);
+void SeqList_Destroy(SeqList * list);
 
 void SeqList_Clear(SeqList *list);
 
@@ -14,7 +14,7 @@ int SeqList_Length(SeqList * list);
 
 int SeqList_Capacity(SeqList * list);
 
-void SeqList_Insert(SeqList* list, SeqListNode* node, int pos);
+int SeqList_Insert(SeqList* list, SeqListNode* node, int pos);
 
 SeqListNode *SeqList_Delete(SeqList* list, int pos);
 
