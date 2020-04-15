@@ -3,24 +3,75 @@
 #include <stdio.h>
 #include "seqlist.h"
 
+typedef struct _tag_SeqList{
+	int length; //链表长度
+	int capacity; // 链表容量
+	unsigned int *node; // 存放一个地址
+	
+}TSeqList;
+
 SeqList *SeqList_Create(int capacity){
+	int ret = 0;
+	TSeqList *tmp = NULL;
+	tmp = (TSeqList*)malloc(sizeof(TSeqList)); //开辟一段内存
+	if(tmp == NULL){
+		ret = -1;
+		printf("func SeqList_Create() err:%d", ret);
+		return NULL;
+	}
+	memset(tmp, 0, sizeof(TSeqList)); // 初始化内存为0
+	
+	tmp->node = (unsigned int*)malloc(sizeof(unsigned int*) * capacity); // 存capacity个这样的地址
+	if(tmp-node == NULL){
+		ret = -2;
+		printf("func SeqList_Create() malloc err:%d", ret);
+		if(tmp != NULL){
+			free(tmp);
+		}
+		return NULL;
+	}
+	memset(tmp, 0, sizeof(unsigned int*) * capacity); // 初始化内存为0
+	tmp->length = 0;
+	tmp->capacity = capacity;
 	return NULL;
 }
 
 void SeqList_Destroy(SeqList * list){
-	return ;
+	TSeqList* tlist = NULL;
+	if(list == NULL){
+		return NULL;
+	}
+	tlist = (TSeqList*)list;
+	if(tlist-node != NULL){
+		free(tlist->node);
+	}
+	free(tlist);
 }
 
 void SeqList_Clear(SeqList *list){
-	
-	return ;
+	TSeqList* tlist = NULL;
+	if(list == NULL){
+		return NULL;
+	}
+	tlist = (TSeqList*)list;
+	tlist->length = 0;
 }
 int SeqList_Length(SeqList * list){
-	return 0;
+	TSeqList* tlist = NULL;
+	if(list == NULL){
+		return -1;
+	}
+	tlist = (TSeqList*)list;
+	return tlist->length;
 }
 
 int SeqList_Capacity(SeqList * list){
-	return 0;
+	TSeqList* tlist = NULL;
+	if(list == NULL){
+		return -1;
+	}
+	tlist = (TSeqList*)list;
+	return tlist->capacity;
 }
 
 int SeqList_Insert(SeqList* list, SeqListNode* node, int pos){
