@@ -75,13 +75,63 @@ int SeqList_Capacity(SeqList * list){
 }
 
 int SeqList_Insert(SeqList* list, SeqListNode* node, int pos){
-	return 0;
+	TSeqList* tlist = NULL;
+	int i = 0, ret = 0;
+	if(list == NULL || node == NULL || pos < 0){
+		ret = -1;
+		printf("func SeqList_Insert() err:%d", ret);
+		return ret;
+	}
+	// 容错
+	if(pos >= tlist->length){
+		pos = tlist->length;
+	}
+	tlist = (TSeqList*) list;
+	// 向后移动
+	for(i = tlist->length; i > pos; i--){
+		tlist->node[i + 1] = tlist->node[i]
+	}
+	tlist->node[pos] = node;
+	tlist->length ++;
+	return ret;
 }
 
 SeqListNode *SeqList_Delete(SeqList* list, int pos){
-	return NULL;
+	TSeqList* tlist = NULL;
+	SeqListNode* tmp = NULL;
+	int i = 0, ret = 0;
+	if(list == NULL || pos < 0){
+		ret = -1;
+		printf("func SeqList_Insert() err:%d", ret);
+		return ret;
+	}
+	// 容错
+	if(pos >= tlist->length){
+		pos = tlist->length;
+	}
+	tlist = (TSeqList*) list;
+	// 向前移动
+	 tmp = (SeqListNode*)tlist->node[pos];
+	 
+	for(i = pos; i < tlist->length - 1; i++){
+		tlist->node[i] = tlist->node[i + 1];
+	}
+	return tmp;
 }
 
 SeqListNode *SeqList_Get(SeqList* list, int pos){
-	return NULL;
+	TSeqList* tlist = NULL;
+	SeqListNode* tmp = NULL;
+	int i = 0, ret = 0;
+	if(list == NULL || pos < 0){
+		ret = -1;
+		printf("func SeqList_Insert() err:%d", ret);
+		return ret;
+	}
+	// 容错
+	if(pos >= tlist->length){
+		pos = tlist->length;
+	}
+	tlist = (TSeqList*) list;
+	return tlist->node[pos];
 }  
